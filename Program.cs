@@ -46,17 +46,12 @@ try
     {
 
         string inputFile = file;
-        string? outputPath = Path.GetDirectoryName(inputFile);
-        if (outputPath == null)
-        {
-            continue;
-        }
-        string outputFile = Path.Combine(outputPath, Path.GetFileNameWithoutExtension(file)) + ".jpg";
-
+        string outputFile = Path.Combine(savePath, Path.GetFileNameWithoutExtension(file)) + ".jpg";
         using (Image image = Image.Load(inputFile))
         {
             Console.WriteLine(outputFile);
-            image.Save(outputFile, new JpegEncoder());
+            var jpeg = new JpegEncoder();
+            image.Save(outputFile, jpeg);
         }
     }
 
