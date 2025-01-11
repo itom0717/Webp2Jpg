@@ -47,9 +47,15 @@ try
 
         string inputFile = file;
         string outputFile = Path.Combine(savePath, Path.GetFileNameWithoutExtension(file)) + ".jpg";
+
+        if(File.Exists(outputFile))
+        {
+            Console.WriteLine("Skip : " + outputFile);
+            continue;
+        }
         using (Image image = Image.Load(inputFile))
         {
-            Console.WriteLine(outputFile);
+            Console.WriteLine("webp to Jpeg : " + outputFile);
             var jpeg = new JpegEncoder();
             image.Save(outputFile, jpeg);
         }
